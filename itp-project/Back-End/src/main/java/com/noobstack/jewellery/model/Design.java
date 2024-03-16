@@ -1,12 +1,19 @@
 package com.noobstack.jewellery.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Table
 public class Design {
 
     @Id
@@ -17,64 +24,5 @@ public class Design {
     private String imageUrl;
     private String price;
 
-    public Design() {
-    }
 
-    public Design(String name, String description, String imageUrl, String price) {
-        this.name = name;
-        this.description = description;
-        this.imageUrl = imageUrl;
-        this.price = price;
-    }
-
-    public UUID getDesign_id() {
-        return design_id;
-    }
-
-    public void setDesign_id(UUID design_id) {
-        this.design_id = design_id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    @Override
-    public String toString() {
-        return "Design{" +
-                "design_id=" + design_id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", price=" + price +
-                '}';
-    }
 }

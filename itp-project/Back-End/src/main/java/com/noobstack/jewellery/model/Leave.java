@@ -1,10 +1,21 @@
 package com.noobstack.jewellery.model;
 
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Leave {
 
     @Id
@@ -17,64 +28,19 @@ public class Leave {
     @ManyToOne
     private Employee employee;
 
-    public Leave() {
-    }
-
-    public Leave(LocalDate leaveFrom, LocalDate leaveTo, String reason, Employee employee) {
-        this.leaveFrom = leaveFrom;
-        this.leaveTo = leaveTo;
-        this.reason = reason;
-        this.employee = employee;
-    }
-
-    public UUID getLeave_id() {
-        return leave_id;
-    }
-
-    public void setLeave_id(UUID leave_id) {
-        this.leave_id = leave_id;
-    }
-
-    public LocalDate getLeaveFrom() {
-        return leaveFrom;
-    }
-
-    public void setLeaveFrom(LocalDate leaveFrom) {
-        this.leaveFrom = leaveFrom;
-    }
-
-    public LocalDate getLeaveTo() {
-        return leaveTo;
-    }
-
-    public void setLeaveTo(LocalDate leaveTo) {
-        this.leaveTo = leaveTo;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
+        Leave leave = (Leave) o;
+        return getLeave_id() != null && Objects.equals(getLeave_id(), leave.getLeave_id());
     }
 
     @Override
-    public String toString() {
-        return "Leave{" +
-                "leave_id=" + leave_id +
-                ", leaveFrom=" + leaveFrom +
-                ", leaveTo=" + leaveTo +
-                ", reason='" + reason + '\'' +
-                ", employee=" + employee +
-                '}';
+    public final int hashCode() {
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
 }

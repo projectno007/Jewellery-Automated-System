@@ -1,39 +1,22 @@
 package com.noobstack.jewellery.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 
 @Entity
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Sellable extends Jewellery{
-    private double sellprice;
+    private double sellPrice;
 
     @ManyToOne
     private Customer customer;
-
-    public double getSellprice() {
-        return sellprice;
-    }
-
-    public void setSellprice(double sellprice) {
-        this.sellprice = sellprice;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    @Override
-    public String toString() {
-        return "Sellable{" +
-                "sellprice=" + sellprice +
-                ", customer=" + customer +
-                '}';
-    }
 }
