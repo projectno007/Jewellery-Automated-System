@@ -228,7 +228,7 @@ class AddAdmin extends Component {
         alert("Image uploading failed!");
       }
       
-      //api call
+      //controller call
       const reg = await fetch("/api/v2/customer/register", {
         headers: {
           Accept: "application/json",

@@ -42,7 +42,7 @@ class PaymentInfo extends Component {
     const designId = JSON.parse(sessionStorage.getItem("designRequestDet"))
       .selectedDesign;
     /*
-  	const insertService = await fetch(`/api/v2/services/addnew`,{
+  	const insertService = await fetch(`/controller/v2/services/addnew`,{
   		headers: {
           	Accept: "application/json",
           	"Content-Type": "application/json",

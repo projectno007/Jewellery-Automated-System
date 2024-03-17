@@ -1,0 +1,60 @@
+package com.shop.jewellery.service.impl;
+
+import com.shop.jewellery.entity.Payment;
+import com.shop.jewellery.repository.PaymentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+@Service
+public class PaymentService implements com.shop.jewellery.service.IPaymentService {
+
+    private final PaymentRepository paymentRepository;
+
+    @Autowired
+    public PaymentService( PaymentRepository paymentRepository) {this.paymentRepository = paymentRepository;}
+
+    @Override
+    public List<Payment> getAllPayments() {return this.paymentRepository.findAll();}
+
+    @Override
+    public ResponseEntity<?> getPaymentById(UUID id) {
+        Optional<Payment> order =this.paymentRepository.findById(id);
+        return order.map(response ->
+                ResponseEntity.ok().body(response))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @Override
+    public ResponseEntity<Payment> addNewPayment(Payment payment) throws URISyntaxException{
+        Payment result = this.paymentRepository.save(payment);
+        return ResponseEntity.created(new URI("/sendPayment" + result.getId())).body(result);
+    }
+
+
+    @Override
+    public ResponseEntity<?> deletePayment(UUID id) {
+        paymentRepository.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public List<Payment> getPaymentByPaymentStatus(String paymentstatus) {
+        return paymentRepository.findByPaymentStatus(paymentstatus);
+    }
+
+    @Override
+    public ResponseEntity<Payment> updatePayment(Payment payment) {
+        Payment result = this.paymentRepository.save(payment);
+        return ResponseEntity.ok().body(result);
+    }
+
+
+}
