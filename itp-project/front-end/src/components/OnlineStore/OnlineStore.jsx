@@ -11,7 +11,7 @@ class OnlineStore extends Component {
   }
 
   componentDidMount() {
-    //api call
+    //controller call
     this.setState({
       jewelry: [
         {

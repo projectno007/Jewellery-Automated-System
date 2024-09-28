@@ -11,7 +11,7 @@ class DesignTable extends Component {
   }
 
   async componentDidMount() {
-    //const getCurrentPurchuses = await fetch(`/api/v2/services`);
+    //const getCurrentPurchuses = await fetch(`/controller/v2/services`);
     //const allPurchuses = await getCurrentPurchuses.json();
     //this.setState({userPurchuses: allPurchuses.filter((data) => data.customer.customer_id == sessionStorage.getItem("userId"))});
 
@@ -46,7 +46,7 @@ class DesignTable extends Component {
   	const removeId = e.target.parentElement.parentElement.firstChild.innerHTML;
   	console.log(removeId);
   	// eslint-disable-next-line
-  	const delete1 = await fetch(`/api/v2/makeservice/delete/${removeId}`, {
+  	const delete1 = await fetch(`/controller/v2/makeservice/delete/${removeId}`, {
         	method: "DELETE",
     	});
     	
